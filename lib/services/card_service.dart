@@ -14,10 +14,7 @@ class CardService extends OpenPayBaseService<Card,Card> {
   Future<List<Card>> getCustomerCards(String customerId){
     String endpoint = getEndpoint(reference:customerId);
     endpoint+="/cards";
-    return  getList(Card(), endpoint:endpoint );
-        
-
-      
+    return  getList(Card(), endpoint:endpoint );              
   }
 
   Future<Card> getCustomerCard(String customerId, String cardId ){

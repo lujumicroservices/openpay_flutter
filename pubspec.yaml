@@ -1,8 +1,8 @@
 name: openpay_flutter
-description: A new flutter plugin project.
-version: 0.0.1
-author:
-homepage:
+description: openpay online payments.
+version: 0.0.5
+author: LuJu Microservices <luju@luju.com.mx>
+homepage: http://luju.com.mx
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
