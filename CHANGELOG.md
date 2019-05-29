@@ -13,3 +13,9 @@ integrate antifraud detection for android
 
 ## [0.0.5] - Adnroid antifraud
 rename class
+
+## [0.0.6] - Adnroid antifraud
+remove card metho
+
+## [0.0.6] - Adnroid antifraud
+remove card method fix

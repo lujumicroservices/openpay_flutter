@@ -30,6 +30,11 @@ class CardService extends OpenPayBaseService<Card,Card> {
     return create(entity, endpoint:endpoint);
   }
 
+Future<bool> removeCard(Card entity, {String endpoint = null})  {
+    endpoint = getEndpoint(reference:entity.customer_id);
+    endpoint+="/cards/${entity.id}.";
+    return delete("", endpoint:endpoint);
+  }
 
 
 
