@@ -17,5 +17,8 @@ rename class
 ## [0.0.6] - Adnroid antifraud
 remove card metho
 
-## [0.0.6] - Adnroid antifraud
+## [0.0.7] - Adnroid antifraud
 remove card method fix
+
+## [0.0.8] - fix delete return
+204 = ok

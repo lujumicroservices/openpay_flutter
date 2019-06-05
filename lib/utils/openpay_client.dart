@@ -133,7 +133,7 @@ class OpenPayClient {
     }
 
     print('htpclient DELETE status : ${response.statusCode}');
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 204 ) {
       // If the call to the server was successful, parse the JSON
       //jsonResponse = json.decode(response.data.toString());
       return true;
