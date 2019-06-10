@@ -26,6 +26,16 @@ abstract class OpenPayBaseService<T extends OpenPayBaseModel,R extends OpenPayBa
     return url;
   }
 
+
+Future<T> submit(T out, R entity,{String endpoint = null,String reference = null}) async {
+    endpoint = getEndpoint(endpoint:endpoint, reference:reference);
+    var response = await _httpClient.post(endpoint, entity);
+    return Future<T>.value(out.fromJson(response) as T);
+
+    
+
+  }
+
   Future<T> create(R entity,{String endpoint = null}) async {
     endpoint = getEndpoint(endpoint:endpoint);
     var response = await _httpClient.post(endpoint, entity);

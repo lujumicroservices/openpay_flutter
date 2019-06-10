@@ -3,6 +3,7 @@ library openpay_flutter;
 import 'package:flutter/services.dart';
 import 'package:openpay_flutter/services/card_service.dart';
 import 'package:openpay_flutter/services/customer_service.dart';
+import 'package:openpay_flutter/services/payments_service.dart';
 import 'package:openpay_flutter/utils/openpay_client.dart';
 
 /// A Calculator.
@@ -16,12 +17,14 @@ class OpenpayAPI {
 
   CustomerService customerService;
   CardService cardService;
+  PaymentService payService;
 
   OpenpayAPI(this._merchantId, this._privateKey, {production = false}) {
     this._production = production;
     _client = OpenPayClient(_merchantId, _privateKey);
     customerService = CustomerService(_client);
     cardService = CardService(_client);
+    payService = PaymentService(_client);
   }
 
   static Future<String> get platformVersion async {

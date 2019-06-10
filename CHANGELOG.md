@@ -22,3 +22,6 @@ remove card method fix
 
 ## [0.0.8] - fix delete return
 204 = ok
+
+## [0.0.9] - add pay transaction
+submit charge
