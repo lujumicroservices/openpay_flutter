@@ -8,6 +8,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 import mx.openpay.android.Openpay;
+import mx.openpay.android.validation.CardValidator;
 
 
 /** OpenpayFlutterPlugin */
@@ -27,7 +28,7 @@ public class OpenpayFlutterPlugin implements MethodCallHandler {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "openpay_flutter");
     channel.setMethodCallHandler(new OpenpayFlutterPlugin(registrar.activity()));
   }
-
+ 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     if (call.method.equals("getPlatformVersion")) {
@@ -38,7 +39,20 @@ public class OpenpayFlutterPlugin implements MethodCallHandler {
             openpay = new Openpay(_merchantId, _privateKey, false);
         }
         result.success(openpay.getDeviceCollectorDefaultImpl().setup(activity));
-      }
+    }
+    else if(call.method.equals("validateCardCVV")){
+          String cardNumber = call.argument("cardNumber");
+          String cvv = call.argument("cvv");
+
+
+        //result.success(true);
+          try{
+              result.success(CardValidator.validateCVV(cvv, cardNumber));
+          }catch (Exception ex){
+              result.success(false);
+          }
+
+    }
     else {
       result.notImplemented();
     }

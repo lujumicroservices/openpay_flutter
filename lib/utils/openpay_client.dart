@@ -43,7 +43,7 @@ class OpenPayClient {
 
     try {
       response =
-          await _httpClient.post(_apiendpoint + endpoint, data: data.toJson());
+          await _httpClient.post(_apiendpoint + endpoint, data: data.toJson(),);
     } catch (ex) {
       _handleWebException(ex, endpoint, "POST");
     }

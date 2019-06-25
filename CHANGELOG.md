@@ -25,3 +25,6 @@ remove card method fix
 
 ## [0.0.9] - add pay transaction
 submit charge
+
+## [0.0.10] - fix transaction json
+fix transaction json

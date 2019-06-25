@@ -11,7 +11,8 @@ part 'transaction.g.dart';
 @JsonSerializable(nullable: false)
 class Transaction extends OpenPayBaseModel {
   Transaction(
-      {this.creation_date,
+      {
+        this.creation_date,
       this.amount,
       this.status,
       this.description,
@@ -37,6 +38,7 @@ class Transaction extends OpenPayBaseModel {
   String method;
   String error_message;
   Card card;
+   @JsonKey(nullable: true)
   BankAccount bank_account;
   String authorization;
   String order_id;

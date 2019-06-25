@@ -19,8 +19,9 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) {
       method: json['method'] as String,
       error_message: json['error_message'] as String,
       card: Card.fromJson(json['card'] as Map<String, dynamic>),
-      bank_account:
-          BankAccount.fromJson(json['bank_account'] as Map<String, dynamic>),
+      bank_account: json['bank_account'] == null
+          ? null
+          : BankAccount.fromJson(json['bank_account'] as Map<String, dynamic>),
       authorization: json['authorization'] as String,
       order_id: json['order_id'] as String,
       customer_id: json['customer_id'] as String,

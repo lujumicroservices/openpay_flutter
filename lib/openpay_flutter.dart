@@ -37,6 +37,15 @@ class OpenpayAPI {
     return version;
   }
 
+  static Future<bool> validateCard(String cvv, String cardNumber) async {
+    final bool version = await _channel.invokeMethod('validateCardCVV',<String, dynamic>{
+        'cvv': cvv,
+        'cardNumber': cardNumber,
+      });
+    print("validate returned");
+    return version;
+  }
+
 }
 
 /* 

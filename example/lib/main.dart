@@ -32,8 +32,14 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await OpenpayAPI.deviceSessionId;
+     
+
       platformVersion = platformVersion.replaceRange(0, 4, "");
+      print("is card valid :");
+       bool cardValid = await OpenpayAPI.validateCard("111", "4111111111111111");
+      print(cardValid);
       print(platformVersion);
+      
       _card.card_number = "5105105105105100";
       _card.holder_name = "Juan Valdes";
       _card.expiration_year = "21";
