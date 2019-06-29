@@ -1,8 +1,9 @@
 name: openpay_flutter
 description: openpay online payments.
-version: 0.0.10
+version: 0.0.11
 author: LuJu Microservices <luju@luju.com.mx>
 homepage: http://luju.com.mx
+
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -12,7 +13,6 @@ dependencies:
     sdk: flutter
   dio: ^2.1.2
   json_annotation: ^2.2.0
-  
 
 dev_dependencies:
   flutter_test:
@@ -21,7 +21,7 @@ dev_dependencies:
   json_serializable: ^2.2.0
 
 # For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
+# following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:

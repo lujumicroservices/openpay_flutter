@@ -28,3 +28,6 @@ submit charge
 
 ## [0.0.10] - fix transaction json
 fix transaction json
+
+## [0.0.11] - IOs Support
+IOs Support

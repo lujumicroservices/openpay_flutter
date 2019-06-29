@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openpay_flutter/openpay_flutter.dart';
 
-
 void main() {
   const MethodChannel channel = MethodChannel('openpay_flutter');
 
