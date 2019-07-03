@@ -1,6 +1,6 @@
 name: openpay_flutter
 description: openpay online payments.
-version: 0.0.11
+version: 0.0.13
 author: LuJu Microservices <luju@luju.com.mx>
 homepage: http://luju.com.mx
 
@@ -54,7 +54,7 @@ flutter:
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  #         style: italicS
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

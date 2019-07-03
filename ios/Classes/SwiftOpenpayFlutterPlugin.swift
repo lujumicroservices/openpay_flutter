@@ -1,14 +1,12 @@
 import Flutter
 import UIKit
 import Openpay
-import CardValidator
+
 
 
 public class SwiftOpenpayFlutterPlugin: NSObject, FlutterPlugin {
 
-   let MERCHANT_ID = "ms9mpfws893d5w6hmpaj"
-   let API_KEY = "sk_976bba3e7bc4451da9261e45055ad829"
-
+ 
    var sessionloaded:Bool = false;
    var sessionId:String = "";
 
@@ -36,13 +34,22 @@ func failSessionID(error: NSError) {
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
 
     sessionloaded = false;
-    if (openpay == nil){
-      openpay = Openpay(withMerchantId: MERCHANT_ID, andApiKey: API_KEY, isProductionMode: false, isDebug: false)
-    }
+   
         
     if (call.method.isEqual("getPlatformVersion")) {
        result("iOSes " + UIDevice.current.systemVersion)
      }else if(call.method.isEqual("getDeviceSessionId")){     
+        var arguments = call.arguments as! [String]
+        
+        let MERCHANT_ID:String = arguments[0]
+        let API_KEY:String = arguments[0]
+
+        if (openpay == nil){
+            openpay = Openpay(withMerchantId: MERCHANT_ID, andApiKey: API_KEY, isProductionMode: false, isDebug: false)
+        }
+    
+        
+        
         openpay.createDeviceSessionId(successFunction: successSessionID, failureFunction: failSessionID)
 
         while(!sessionloaded){
@@ -57,10 +64,10 @@ func failSessionID(error: NSError) {
     else if(call.method.isEqual("validateCardCVV")){
         
     
-        var cardNumber:String = call.argument("cardNumber")
-         var cvv:String = call.argument("cvv")
+  //      var cardNumber:String = call.argument("cardNumber")
+  //       var cvv:String = call.argument("cvv")
         
-        var isValid:Bool = CardValidator.validateCVV(cvv, cardNumber)
+        //var isValid:Bool = CardValidator.validateCVV(cvv, cardNumber)
         result(true);
     }
 

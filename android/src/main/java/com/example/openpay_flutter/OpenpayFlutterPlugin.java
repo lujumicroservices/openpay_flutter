@@ -17,9 +17,9 @@ public class OpenpayFlutterPlugin implements MethodCallHandler {
   private final Activity activity;
   Openpay openpay;
 
-    String _merchantId = "ms9mpfws893d5w6hmpaj";
+    /* String _merchantId = "ms9mpfws893d5w6hmpaj";
     String _privateKey = "sk_976bba3e7bc4451da9261e45055ad829";
-
+ */
     private OpenpayFlutterPlugin(Activity activity) {
         this.activity = activity;
     }
@@ -35,10 +35,18 @@ public class OpenpayFlutterPlugin implements MethodCallHandler {
       result.success("Android juan " + android.os.Build.VERSION.RELEASE);
     }else if(call.method.equals("getDeviceSessionId")){
 
+          String _merchantId = call.argument("merchantId");
+          String _privateKey = call.argument("privateKey");
+
+
         if (openpay == null){
             openpay = new Openpay(_merchantId, _privateKey, false);
         }
-        result.success(openpay.getDeviceCollectorDefaultImpl().setup(activity));
+        String sessionId = openpay.getDeviceCollectorDefaultImpl().setup(activity);
+        if (sessionId.length() > 4){
+          sessionId = sessionId.substring(4,sessionId.length());
+        }
+        result.success(sessionId);
     }
     else if(call.method.equals("validateCardCVV")){
           String cardNumber = call.argument("cardNumber");
