@@ -17,8 +17,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   CreditCard.Card _card = new CreditCard.Card();
-   String _merchantId = 'ms9mpfws893d5w6hmpaj';
+  /* String _merchantId = 'ms9mpfws893d5w6hmpaj';
   String _privateKey = 'sk_976bba3e7bc4451da9261e45055ad829';
+ */
+
+  String _merchantId = 'm0mhzzv3qdmwyuahydqq';
+  String _privateKey = 'sk_df18c0012da643ee90a2d46de39df1b8';
 
   @override
   void initState() {
@@ -31,15 +35,14 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await OpenpayAPI.deviceSessionId;
-     
+      platformVersion = await OpenpayAPI.deviceSessionId(this._merchantId,this._privateKey);
 
       platformVersion = platformVersion.replaceRange(0, 4, "");
       print("is card valid :");
-       bool cardValid = await OpenpayAPI.validateCard("111", "4111111111111111");
+      bool cardValid = await OpenpayAPI.validateCard("111", "4111111111111111");
       print(cardValid);
       print(platformVersion);
-      
+
       _card.card_number = "5105105105105100";
       _card.holder_name = "Juan Valdes";
       _card.expiration_year = "21";
@@ -48,35 +51,26 @@ class _MyAppState extends State<MyApp> {
       _card.device_session_id = platformVersion;
       _card.customer_id = "ahht4js7dhkmgjbcfiuh";
 
-      Map<String, dynamic> customer = <String, dynamic>{            
-      'name': "jaun",
-      'email': "juan@juan.com",
-      'last_name': "valde",
-      'phone_number': "22222",      
-    };
-      
+      Map<String, dynamic> customer = <String, dynamic>{
+        'name': "jaun",
+        'email': "juan@juan.com",
+        'last_name': "valde",
+        'phone_number': "22222",
+      };
 
       Payment pp = Payment();
-      pp.amount = 5;      
+      pp.amount = 5;
       pp.source_id = "kcuu9bu4p8yerwisr30j";
       pp.method = "card";
       pp.description = "test charge";
       pp.device_session_id = platformVersion;
-      
-     // pp.customer = customer;
-     // pp.order_id = "oid-00055";
 
-
-
-
-      
-
+      // pp.customer = customer;
+      // pp.order_id = "oid-00055";
 
       OpenpayAPI _opp = new OpenpayAPI(_merchantId, _privateKey);
       //_opp.cardService.createCard(_card);
-      _opp.payService.performPayment( "alb9grgcm00uhlyowimf", pp);
-
-
+      _opp.payService.performPayment("alb9grgcm00uhlyowimf", pp);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }

@@ -32,8 +32,11 @@ class OpenpayAPI {
     return version;
   }
 
-  static Future<String> get deviceSessionId async {
-    final String version = await _channel.invokeMethod('getDeviceSessionId');
+  static Future<String>  deviceSessionId(String merchantId,String privateKey) async {
+    final String version = await _channel.invokeMethod('getDeviceSessionId',<String, dynamic>{
+        '_merchantId': merchantId,
+        '_privateKey': privateKey,
+      });
     return version;
   }
 

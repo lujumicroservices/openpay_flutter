@@ -17,9 +17,6 @@ public class OpenpayFlutterPlugin implements MethodCallHandler {
   private final Activity activity;
   Openpay openpay;
 
-    String _merchantId = "ms9mpfws893d5w6hmpaj";
-    String _privateKey = "sk_976bba3e7bc4451da9261e45055ad829";
-
     private OpenpayFlutterPlugin(Activity activity) {
         this.activity = activity;
     }
@@ -34,6 +31,10 @@ public class OpenpayFlutterPlugin implements MethodCallHandler {
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android juan " + android.os.Build.VERSION.RELEASE);
     }else if(call.method.equals("getDeviceSessionId")){
+
+        String _merchantId = call.argument("_merchantId");
+        String _privateKey = call.argument("_privateKey");
+
 
         if (openpay == null){
             openpay = new Openpay(_merchantId, _privateKey, false);
