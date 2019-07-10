@@ -1,4 +1,4 @@
-group 'com.luju.openpay_flutter'
+group 'com.example.openpay_flutter'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 

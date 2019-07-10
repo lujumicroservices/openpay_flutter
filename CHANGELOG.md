@@ -28,3 +28,12 @@ submit charge
 
 ## [0.0.10] - fix transaction json
 fix transaction json
+
+## [0.0.11] - IOs Support
+IOs Support
+
+## [0.0.12] - andorid truncate extre chars
+truncate session id for android
+
+## [0.0.12] - add merchand and api key as parameters
+add merchand and api key as parameters

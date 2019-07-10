@@ -14,8 +14,9 @@ A new flutter plugin project.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
+  s.vendored_frameworks = 'libs/iphonesimulator/Openpay.framework'
   s.dependency 'Flutter'
-
-  s.ios.deployment_target = '8.0'
+#  s.dependency 'XWebView' , '0.12.1',
+  s.ios.deployment_target = '10.3'
 end
 

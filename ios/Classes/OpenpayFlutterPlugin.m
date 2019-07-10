@@ -1,20 +1,8 @@
 #import "OpenpayFlutterPlugin.h"
+#import <openpay_flutter/openpay_flutter-Swift.h>
 
 @implementation OpenpayFlutterPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"openpay_flutter"
-            binaryMessenger:[registrar messenger]];
-  OpenpayFlutterPlugin* instance = [[OpenpayFlutterPlugin alloc] init];
-  [registrar addMethodCallDelegate:instance channel:channel];
+  [SwiftOpenpayFlutterPlugin registerWithRegistrar:registrar];
 }
-
-- (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-  } else {
-    result(FlutterMethodNotImplemented);
-  }
-}
-
 @end

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:openpay_flutter/model/card.dart' as CreditCard;
-import 'package:openpay_flutter/model/payment.dart';
-import 'package:openpay_flutter/model/customer.dart';
-import 'package:openpay_flutter/model/transaction.dart';
+
 import 'package:flutter/services.dart';
+import 'package:openpay_flutter/model/payment.dart';
 import 'package:openpay_flutter/openpay_flutter.dart';
 
 void main() => runApp(MyApp());
@@ -16,10 +14,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  CreditCard.Card _card = new CreditCard.Card();
-  /* String _merchantId = 'ms9mpfws893d5w6hmpaj';
-  String _privateKey = 'sk_976bba3e7bc4451da9261e45055ad829';
- */
+  
+
 
   String _merchantId = 'm0mhzzv3qdmwyuahydqq';
   String _privateKey = 'sk_df18c0012da643ee90a2d46de39df1b8';
@@ -35,6 +31,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
+
       platformVersion = await OpenpayAPI.deviceSessionId(this._merchantId,this._privateKey);
 
       platformVersion = platformVersion.replaceRange(0, 4, "");
@@ -43,13 +40,13 @@ class _MyAppState extends State<MyApp> {
       print(cardValid);
       print(platformVersion);
 
-      _card.card_number = "5105105105105100";
+     /*  _card.card_number = "5105105105105100";
       _card.holder_name = "Juan Valdes";
       _card.expiration_year = "21";
       _card.expiration_month = "06";
       _card.cvv2 = "456";
       _card.device_session_id = platformVersion;
-      _card.customer_id = "ahht4js7dhkmgjbcfiuh";
+      _card.customer_id = "ahht4js7dhkmgjbcfiuh"; */
 
       Map<String, dynamic> customer = <String, dynamic>{
         'name': "jaun",
@@ -71,6 +68,8 @@ class _MyAppState extends State<MyApp> {
       OpenpayAPI _opp = new OpenpayAPI(_merchantId, _privateKey);
       //_opp.cardService.createCard(_card);
       _opp.payService.performPayment("alb9grgcm00uhlyowimf", pp);
+
+
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
