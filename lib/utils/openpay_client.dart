@@ -10,7 +10,7 @@ class OpenPayClient {
 
   String _merchantId;
   String _privateKey;
-  String _apiendpoint;
+  String _apiendpoint2;
   bool _production = false;
   int _timeoutSeconds;
   Dio _httpClient;
@@ -18,23 +18,24 @@ class OpenPayClient {
   OpenPayClient(this._merchantId, this._privateKey, {production = false}) {
     this._production = production;
     if (this._production)
-      _apiendpoint = _production_url;
+      this._apiendpoint2 = _production_url;
     else
-      _apiendpoint = _sandbox_url;
-    _timeoutSeconds = 120;
+      this._apiendpoint2 = _sandbox_url;
+     
+    this._timeoutSeconds = 120;
 
     var bytes = utf8.encode("$_privateKey:");
     var base64Str = base64.encode(bytes);
 
-    _httpClient = Dio(BaseOptions(
-        baseUrl: _apiendpoint,
+    this._httpClient = Dio(BaseOptions(
+        baseUrl: _apiendpoint2,
         connectTimeout: _timeoutSeconds * 1000,
         receiveTimeout: _timeoutSeconds * 1000,
         headers: {"Authorization": "Basic $base64Str"}));
   }
 
   String get apiMerchandId => _merchantId;
-  String get apiendpoint => _apiendpoint;
+  String get apiendpoint => _apiendpoint2;
   bool get isProduction => _production;
 
   Future<Map<String, dynamic>> post(String endpoint, dynamic data) async {
@@ -43,7 +44,7 @@ class OpenPayClient {
 
     try {
       response =
-          await _httpClient.post(_apiendpoint + endpoint, data: data.toJson(),);
+          await _httpClient.post(this._apiendpoint2 + endpoint, data: data.toJson());
     } catch (ex) {
       _handleWebException(ex, endpoint, "POST");
     }
@@ -65,7 +66,7 @@ class OpenPayClient {
     Map<String, dynamic> jsonResponse;
 
     try {
-      response = await _httpClient.put(_apiendpoint + endpoint, data: data);
+      response = await _httpClient.put(this._apiendpoint2 + endpoint, data: data);
     } catch (ex) {
       _handleWebException(ex, endpoint, "POST");
     }
@@ -85,9 +86,9 @@ class OpenPayClient {
     Map<String, dynamic> jsonResponse;
 
     try {
-      response = await _httpClient.get(_apiendpoint + endpoint);
+      response = await _httpClient.get(this._apiendpoint2 + endpoint);
     } catch (ex) {
-      _handleWebException(ex, endpoint, "POST");
+      _handleWebException(ex, endpoint, "GET");
     }
 
     print('htpclient GET request status : ${response.statusCode}');
@@ -97,7 +98,7 @@ class OpenPayClient {
       return jsonResponse;
     } else {
       // If that call was not successful, throw an error.
-      _handleWebResponse(response, endpoint, "POST");
+      _handleWebResponse(response, endpoint, "GET");
     }
   }
 
@@ -105,10 +106,12 @@ class OpenPayClient {
     Response response;
     List<dynamic> jsonResponse;
 
+    
     try {
-      response = await _httpClient.get(_apiendpoint + endpoint);
+      var urls = this._apiendpoint2 + endpoint;    
+      response = await _httpClient.get(urls);
     } catch (ex) {
-      _handleWebException(ex, endpoint, "POST");
+      _handleWebException(ex, endpoint, "GET");
     }
 
     print('htpclient GET request status : ${response.statusCode}');
@@ -118,7 +121,7 @@ class OpenPayClient {
       return jsonResponse;
     } else {
       // If that call was not successful, throw an error.
-      _handleWebResponse(response, endpoint, "POST");
+      _handleWebResponse(response, endpoint, "GET");
     }
   }
 
@@ -127,9 +130,9 @@ class OpenPayClient {
     Map<String, dynamic> jsonResponse;
 
     try {
-      response = await _httpClient.delete(_apiendpoint + endpoint);
+      response = await _httpClient.delete(_apiendpoint2 + endpoint);
     } catch (ex) {
-      _handleWebException(ex, endpoint, "POST");
+      _handleWebException(ex, endpoint, "DELETE");
     }
 
     print('htpclient DELETE status : ${response.statusCode}');
@@ -138,7 +141,7 @@ class OpenPayClient {
       //jsonResponse = json.decode(response.data.toString());
       return true;
     } else {
-      _handleWebResponse(response, endpoint, "POST");
+      _handleWebResponse(response, endpoint, "DELETE");
     }
     return false;
   }

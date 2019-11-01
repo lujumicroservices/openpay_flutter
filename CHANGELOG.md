@@ -37,3 +37,18 @@ truncate session id for android
 
 ## [0.0.12] - add merchand and api key as parameters
 add merchand and api key as parameters
+## [0.0.14] - add merchand and api key as parameters
+add merchand and api key as parameters
+
+## [0.0.15] - update dependencides
+update dependencides
+
+## [0.0.16] - change charge return
+change charge return
+
+## [0.0.17] - use devisession id for test hardcoded
+use devisession id for test hardcoded
+
+
+## [0.0.18] - recompile
+recompile

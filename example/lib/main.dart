@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:openpay_flutter/model/customer.dart';
 import 'package:openpay_flutter/model/payment.dart';
 import 'package:openpay_flutter/openpay_flutter.dart';
 
@@ -34,11 +35,24 @@ class _MyAppState extends State<MyApp> {
 
       platformVersion = await OpenpayAPI.deviceSessionId(this._merchantId,this._privateKey);
 
-      platformVersion = platformVersion.replaceRange(0, 4, "");
+      Map<String, String> filters = {
+        "externalId": "103706956058001336318",
+        "offset": "0",
+        "limit": "1"
+      };
+
+      OpenpayAPI _opp = new OpenpayAPI(_merchantId, _privateKey);
+      _opp.customerService.getList(Customer(), filters: filters).then((data){
+        print(data);
+      }).catchError((error){
+        print(error);
+      });
+
+     /*  platformVersion = platformVersion.replaceRange(0, 4, "");
       print("is card valid :");
       bool cardValid = await OpenpayAPI.validateCard("111", "4111111111111111");
       print(cardValid);
-      print(platformVersion);
+      print(platformVersion); */
 
      /*  _card.card_number = "5105105105105100";
       _card.holder_name = "Juan Valdes";
@@ -48,26 +62,25 @@ class _MyAppState extends State<MyApp> {
       _card.device_session_id = platformVersion;
       _card.customer_id = "ahht4js7dhkmgjbcfiuh"; */
 
-      Map<String, dynamic> customer = <String, dynamic>{
+      /* Map<String, dynamic> customer = <String, dynamic>{
         'name': "jaun",
         'email': "juan@juan.com",
         'last_name': "valde",
         'phone_number': "22222",
-      };
-
+      };    
       Payment pp = Payment();
       pp.amount = 5;
       pp.source_id = "kcuu9bu4p8yerwisr30j";
       pp.method = "card";
       pp.description = "test charge";
-      pp.device_session_id = platformVersion;
+      pp.device_session_id = platformVersion; */
 
       // pp.customer = customer;
       // pp.order_id = "oid-00055";
 
-      OpenpayAPI _opp = new OpenpayAPI(_merchantId, _privateKey);
+      //OpenpayAPI _opp = new OpenpayAPI(_merchantId, _privateKey);
       //_opp.cardService.createCard(_card);
-      _opp.payService.performPayment("alb9grgcm00uhlyowimf", pp);
+      //_opp.payService.performPayment("alb9grgcm00uhlyowimf", pp);
 
 
     } on PlatformException {

@@ -32,23 +32,28 @@ class OpenpayAPI {
     return version;
   }
 
-  static Future<String>  deviceSessionId(String merchantId,String privateKey) async {
-    final String version = await _channel.invokeMethod('getDeviceSessionId',<String, dynamic>{
+  Future<String> deviceSessionId(String merchantId, String privateKey) async {
+    if (this._production) {
+      final String version =
+          await _channel.invokeMethod('getDeviceSessionId', <String, dynamic>{
         '_merchantId': merchantId,
         '_privateKey': privateKey,
       });
-    return version;
+      return version;
+    } else {
+      return "kR1MiQhz2otdIuUlQkbEyitIqVMiI16f";
+    }
   }
 
   static Future<bool> validateCard(String cvv, String cardNumber) async {
-    final bool version = await _channel.invokeMethod('validateCardCVV',<String, dynamic>{
-        'cvv': cvv,
-        'cardNumber': cardNumber,
-      });
+    final bool version =
+        await _channel.invokeMethod('validateCardCVV', <String, dynamic>{
+      'cvv': cvv,
+      'cardNumber': cardNumber,
+    });
     print("validate returned");
     return version;
   }
-
 }
 
 /* 
